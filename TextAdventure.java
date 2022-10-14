@@ -24,15 +24,28 @@ public class TextAdventure
     // ask the user for their name.
     System.out.println("What is your name?\n");
     input = inScanner.nextLine();
-
+    
     // Change ourHero's name
     // ADD CODE HERE
-    
+    ourHero.changeName(input);
     // describe the starting situation. Feel free to change this
     System.out.println("You wake up to find yourself on the edge of a shadowy forest with the sun nearly set. \nYou see what looks like a city in the distance. \nWhat would you like to do? \ncity: go towards the city\nforest: turn around and re-enter the forest\nnap: go back to sleep\n" + ourHero.getName() + ": ");
+    input = inScanner.nextLine();
+    if (ourHero.getEnergy() - 2 >0){
+      if (input.equals("forest")){
+        enterZone1();
+      }
+      else if (input.equals("city")){
 
+      }
+      else{
+        ourHero.nap();
+        System.out.println("energy + 2");
+      }
+    }
     // get user input and go to the appropriate zone based on their input
     // ADD CODE HERE
+    
 
   }
 
@@ -40,10 +53,11 @@ public class TextAdventure
   {
     // change image
     // ADD CODE HERE
-
+    console.setImage("mountains.png");
     // describe the area/situation to the user. 
     // Give them options for choices.
     // ADD CODE HERE
+    System.out.println("You find your self in front of a large mountain with great scenery. \nWhat would you like to do? \nmountain: Travel up the mountain \nforest: turn around and enter the forest");
 
     // Take action or go to another zone based on their choice
     // ADD CODE HERE
