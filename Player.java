@@ -4,15 +4,19 @@ public class Player
 {
   String name;
   int health;
+  int attack;
   double gold;
   int monstersDefeated;
+  int energy = 10;
 
-  public Player(String playerName, int startingHealth, double startingGold)
+
+  public Player(String playerName, int startingHealth, double startingGold,int attackPower)
   {
     // ADD CODE HERE
     name = playerName;
     health = startingHealth;
     gold = startingGold;
+    attack = attackPower;
   }
 
   public String getName()
@@ -58,4 +62,15 @@ public class Player
     // ADD CODE HERE
     monstersDefeated++;
   }
+  public int getEnergy(){
+    return energy;
+  }
+  public void nap(){
+    energy= energy+5;
+    System.out.println("You took a nap\nEnergy + 5");
+  }
+  public int getAttack(){
+    return attack;
+  }
+  
 }
