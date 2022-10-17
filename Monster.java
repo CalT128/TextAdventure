@@ -6,11 +6,11 @@ public class Monster {
     public Monster(int h, int a){
         healthBonus = h;
         attackBonus = a;
-        health = (int)(Math.random()*11+40+healthBonus);
-        attack = (int)(Math.random()*11+15+attackBonus);
+        health = (int)(Math.random()*11+20+healthBonus);
+        attack = (int)(Math.random()*11+10+attackBonus);
     }
     public Monster(){
-        health = (int)(Math.random()*11+40+healthBonus);
+        health = (int)(Math.random()*11+30+healthBonus);
         attack = (int)(Math.random()*11+15+attackBonus);
 
     }

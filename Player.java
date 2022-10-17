@@ -7,9 +7,7 @@ public class Player
   int attack;
   double gold;
   int monstersDefeated;
-
   int energy = 10;
-
 
   public Player(String playerName, int startingHealth, double startingGold,int attackPower)
   {
@@ -67,16 +65,14 @@ public class Player
     return energy;
   }
   public void nap(){
-    energy= energy+5;
+    energy = energy + 5;
     System.out.println("You took a nap\nEnergy + 5");
   }
   public int randAttack(){
     return (int)(Math.random()*10+attack);
   }
-  public void bonus(int hB,int aB){
-    health = health + hB;
-    attack = attack + aB;
-
+  public void bonus(int healthBonus, int attackBonus){
+    health = health+healthBonus;
+    attack = attack+attackBonus;
   }
-  
 }

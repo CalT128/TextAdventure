@@ -16,13 +16,14 @@ public class TextAdventure
   int bNameRand;
   int hHealthRand;
   boolean mDead;
-  int mCounter = 5;
+  int mCounter = 0;
   //bosses
   boolean golem = true;
   boolean humanoid = true;
   boolean skeleton = true;
   int damageRed = 0;
   int actDamageRed;
+  boolean firstEncounter = true;
   //chests
   boolean mountainChest = false;
   boolean pathChest = false;
@@ -36,7 +37,7 @@ public class TextAdventure
     inScanner = new Scanner(System.in);
 
     // feel free to change the player's starting values
-    ourHero = new Player("Bob", 100, 0,10);
+    ourHero = new Player("Bob", 100, 0,15);
   }
 
   public void play()
@@ -130,10 +131,13 @@ public class TextAdventure
   {
     // change image
     // ADD CODE HERE
-    System.out.println("While walking back into the forest");
-    monster(0,0,false,"");
-    if (dead){
-      gameEnd();
+    if (firstEncounter){
+      System.out.println("While walking back into the forest");
+      monster(0,0,false,"");
+      if (dead){
+        gameEnd();
+      }
+      firstEncounter = false;
     }
     console.setImage("forest.jpg");
     // describe the area/situation to the user. 
@@ -388,11 +392,9 @@ public class TextAdventure
     // ADD CODE HERE
     String secretPath = "";
     String secretOption = "";
-    boolean secretOp = false;
     if (pathChest){
       secretPath = ". Their is also a side path that has appeared";
       secretOption = "\nside path: follow the side path";
-      secretOp = true;
     }
     System.out.println("You arrive in the middle of the path, it is a small clearing" + secretPath);
     System.out.println("What will you do\npath: continue down the path" + secretOption + "\nbuilding: \tgo to the massive building\nnap: go to sleep\n" + hName() + ": ");
@@ -626,20 +628,20 @@ public class TextAdventure
       else{
         System.out.println("You have eliminated the " + mName);
         ourHero.defeatMonster();
-        if (ourHero.getMonstersDefeated() > mCounter+5){
+        if (ourHero.getMonstersDefeated() >= mCounter+5){
           mCounter = ourHero.getMonstersDefeated();
-          System.out.println("You have defeated " + ourHero.getMonstersDefeated() +"monsters. You gain +2 attack and +50 health ");
-          ourHero.bonus(50,2);
+          System.out.println("You have defeated " + ourHero.getMonstersDefeated() +"monsters. You gain +5 attack and +100 health ");
+          ourHero.bonus(100,5);
         }
         if (boss){
-          System.out.println("You have defeated a boss. You gain +10 attack and + 100 health");
-          ourHero.bonus(100,10);
+          System.out.println("You have defeated a boss. You gain +10 attack and + 150 health");
+          ourHero.bonus(150,10);
         }
         mDead = true;
       }
       if (dead == false && mDead == false){
         while (true){
-          System.out.println("What would you like to do?\nYour minimum attack power is: " + hMinAttack() + "\nYour health is " + hHealth() + "\n" + mName + " attack poewr is: " + monster.getAttack() + "\n" + mName + " health is: " + monster.getHealth() + "\nattack: \tDeal a minimum of " + hMinAttack() +  " damage\nrun: \tYou may loose some health\n" + hName()+ ": ");
+          System.out.println("What would you like to do?\nYour minimum attack power is: " + hMinAttack() + "\nYour health is " + hHealth() + "\n" + mName + " attack power is: " + monster.getAttack() + "\n" + mName + " health is: " + monster.getHealth() + "\nattack: \tDeal a minimum of " + hMinAttack() +  " damage\nrun: \tYou may loose some health\n" + hName()+ ": ");
           input = inScanner.nextLine();
           //option run
           if (input.equals("run")){
@@ -678,9 +680,14 @@ public class TextAdventure
             else{
               System.out.println("You have eliminated the " + mName);
               ourHero.defeatMonster();
-              if (ourHero.getMonstersDefeated() > mCounter+5){
+              if (ourHero.getMonstersDefeated() >= mCounter+5){
                 mCounter = ourHero.getMonstersDefeated();
-                ourHero.bonus(5,5);
+                System.out.println("You have defeated " + ourHero.getMonstersDefeated() +"monsters. You gain +5 attack and +100 health ");
+                ourHero.bonus(100,5);
+              }
+              if (boss){
+                System.out.println("You have defeated a boss. You gain +10 attack and + 100 health");
+                ourHero.bonus(150,10);
               }
               mDead = true;
               break;
